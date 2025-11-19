@@ -1,0 +1,49 @@
+.dashboard-container {
+    margin: 25px 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.header-dashboard {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-add-device {
+    border: 1px solid black;
+    background: transparent;
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-add-device:hover {
+    background: black;
+    color: white;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 0 0 #4f4f4f;
+}
+
+.btn-add-device:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 0 0 #4f4f4f;
+}
+
+/* CONTENEDOR DE DISPOSITIVOS CREADOS O CONFIGURADOS*/
+
+.devices-content {
+    display: flex;
+    background: transparent;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 30px;
+}

@@ -1,0 +1,21 @@
+.new-device-container{
+    margin: 25px 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.header-new-device{
+    display: flex;
+    gap: 20px;
+}
+
+.form-device{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-device input {
+    padding: 10px;
+}

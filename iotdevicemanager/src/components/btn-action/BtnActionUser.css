@@ -1,0 +1,25 @@
+.btn-action-user {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    margin: 10px 0;
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-action-user:hover {
+    background-color: white;
+    color: black;
+    transform: translateY(2px);
+    box-shadow: 0 0 10px white;
+}
+.btn-action-user:active {
+    transform: translateY(0);
+    box-shadow: none;
+}

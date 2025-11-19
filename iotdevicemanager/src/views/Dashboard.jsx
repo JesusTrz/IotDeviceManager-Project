@@ -1,13 +1,54 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./css/Dashboard.css";
+
+// Peticiones a la API
+import { deleteDevice, getAllDevices } from "../api/devicesApi";
+
 // NAVEGACION
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
+
 // ICONOS
-import { HiPlus } from "react-icons/hi2"; 
+import { HiPlus, HiWrench, HiTrash } from "react-icons/hi2";
+
 // COMPONENTES
-import BtnAction from "../components/btn-action/BtnAction"
+import BtnAction from "../components/btn-action/BtnAction";
+import BtnActionUser from "../components/btn-action/BtnActionUser";
 
 const Dashboard = () => {
+  const [devices, setDevices] = useState([]);
+
+  // FUNCION DE OBTENER TODOS LOS DISPOSITIVOS
+  useEffect(() => {
+    getAllDevices()
+      .then((res) => {
+        console.log("Dispositivos obtenidos:", res.data);
+        setDevices(res.data); // Guardamos los dispositivos en el estado
+      })
+      .catch((err) => {
+        console.error("Error al obtener dispositivos:", err);
+      });
+  }, []);
+
+  //FUNCION DE EDITAR
+
+  // FUNCION DE ELIMINAR
+  const handleDelete = async (id) => {
+    const confirmed = window.confirm(
+      "¿Estás seguro de que deseas eliminar este dispositivo?"
+    );
+    if (!confirmed) return;
+
+    try {
+      await deleteDevice(id);
+      const response = await getAllDevices();
+      setDevices(response.data);
+      alert("Dispositivo eliminado correctamente.");
+    } catch (error) {
+      console.error("Error al eliminar el dispositivo:", error);
+      alert("Hubo un error al eliminar el dispositivo.");
+    }
+  };
+
   return (
     <div className="dashboard-container">
       <div className="header-dashboard">
@@ -18,17 +59,48 @@ const Dashboard = () => {
       <hr />
 
       <div className="nav-container">
-        <h2>Dispositivos</h2>
+        <h2>Tus Dispositivos:</h2>
 
-      <Link to={"/newDevice"} title="Agregar Nuevo Dispositivo">
-        <BtnAction>
-          <HiPlus size={20}/>
-        </BtnAction>
-      </Link>
+        <Link to={"/newDevice"} title="Agregar Nuevo Dispositivo">
+          <BtnAction>
+            <HiPlus size={20} />
+          </BtnAction>
+        </Link>
       </div>
 
       <div className="devices-content">
-        <h2>Lista de Dispositivos</h2>
+        <ul className="device-list">
+          {devices.length === 0 ? (
+            <p>No hay dispositivos registrados.</p>
+          ) : (
+            devices.map((device) => (
+              <li key={device.id} className="device-item">
+                <div className="device-info">
+                  <p>
+                    <b>Id del dispositivo: </b> {device.id}
+                  </p>
+                  <p>
+                    <b>Nombre: </b> {device.name}
+                  </p>
+                  <p>
+                    <b>Status: </b> {device.status}
+                  </p>
+                </div>
+
+                <div className="device-actions">
+                  <Link to={`/editDevice/${device.id}`} title="Editar Dispositivo">
+                    <BtnActionUser>
+                      <HiWrench size={20} />
+                    </BtnActionUser>
+                  </Link>
+                  <BtnActionUser onClick={() => handleDelete(device.id)}>
+                    <HiTrash size={20} />
+                  </BtnActionUser>
+                </div>
+              </li>
+            ))
+          )}
+        </ul>
       </div>
     </div>
   );

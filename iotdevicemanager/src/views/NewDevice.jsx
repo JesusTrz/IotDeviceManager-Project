@@ -1,12 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 import "./css/NewDevice.css";
-// ICONOS https://react-icons.github.io/react-icons/icons/hi2/
-import { HiArrowLeft } from "react-icons/hi2";
+
+import { HiArrowLeft, HiCpuChip } from "react-icons/hi2";
 import BtnAction from "../components/btn-action/BtnAction";
+import BtnActionUser from "../components/btn-action/BtnActionUser";
+
+import { useNavigate } from "react-router-dom";
+
+// API
+import { addDevice } from "../api/devicesApi";
 
 const NewDevice = () => {
+  const navigate = useNavigate();
+
   const volverAtras = () => {
     window.history.back();
+  };
+
+  // ESTADOS DEL FORMULARIO
+  const [newDevice, setNewDevice] = useState({
+    name: "",
+    status: "En Linea",
+    currentConfigJson: "",
+  });
+
+  // Cambio de inputs
+  const handleChange = (e) => {
+    setNewDevice({
+      ...newDevice,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  // Enviar formulario
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Validaciones básicas
+    if (!newDevice.name.trim()) {
+      return alert("El nombre del dispositivo es obligatorio.");
+    }
+
+    if (!newDevice.currentConfigJson.trim()) {
+      return alert("Debes ingresar un JSON de configuración.");
+    }
+
+    try {
+      // Enviar a la API
+      await addDevice(newDevice);
+
+      alert("Dispositivo creado correctamente.");
+
+      // Volver al dashboard
+      navigate("/");
+    } catch (error) {
+      console.error("Error al crear dispositivo:", error);
+      alert("Hubo un error al crear el dispositivo.");
+    }
   };
 
   return (
@@ -15,6 +65,7 @@ const NewDevice = () => {
         <BtnAction onClick={volverAtras}>
           <HiArrowLeft size={30} />
         </BtnAction>
+
         <div className="subtitle-device">
           <h1>Nuevo Dispositivo</h1>
           <p>Configura un nuevo dispositivo.</p>
@@ -24,22 +75,39 @@ const NewDevice = () => {
       <hr />
 
       <div className="new-device-form">
+        <h2>Nuevo dispositivo</h2>
 
-        <form action="#" method="post" className="form-device">
-          <h3>Device</h3>
-          <label htmlFor="device-name">Nombre del dispositivo</label>
-          <input type="text" id="nombre" />
-          <label htmlFor="device-status">Status</label>
-          <select>
-            <option value="HTML">Sin status</option>
-            <option value="HTML">Activo</option>
-            <option value="CSS">No Activo</option>
+        <form onSubmit={handleSubmit} className="add-device-form">
+          <label>Nombre del Dispositivo:</label>
+          <input
+            type="text"
+            name="name"
+            value={newDevice.name}
+            onChange={handleChange}
+          />
+
+          <label>Status:</label>
+          <select
+            name="status"
+            value={newDevice.status}
+            onChange={handleChange}
+          >
+            <option value="En Linea">En Linea</option>
+            <option value="Fuera de Linea">Fuera de Linea</option>
           </select>
-          <label htmlFor="device-json">Configuracion</label>
-          <textarea id="device-json" rows="10" />
-          <BtnAction>Agregar</BtnAction>
+
+          <label>Configuración (JSON):</label>
+          <textarea
+            name="currentConfigJson"
+            value={newDevice.currentConfigJson}
+            onChange={handleChange}
+          ></textarea>
+
+          <BtnActionUser type="submit">
+            <HiCpuChip size={20} style={{ paddingRight: "10px" }} />
+            Agregar Dispositivo
+          </BtnActionUser>
         </form>
-        
       </div>
     </div>
   );

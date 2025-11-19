@@ -47,3 +47,37 @@
     padding: 10px;
     border-radius: 30px;
 }
+
+.device-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    width: 99.5%;
+    margin: 0;
+}
+
+.device-item {
+    display: flex;
+    flex-direction: column;
+    background: black;
+    color: white;
+    border-radius: 20px;
+    padding: 16px;
+    margin: 5px 0 10px 5px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.device-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 6px 0 0 #4f4f4f;
+}
+
+.device-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: right;
+}

@@ -1,0 +1,23 @@
+.startview-container {
+    display: flex;
+    flex-direction: column;
+    margin: 40px 60px;
+    color: var(--text);
+    gap: 50px;
+}
+
+.first-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title h1{
+    font-size: 60px;
+}
+
+.second-container {
+    display: flex;
+    flex-direction: column;
+    
+}

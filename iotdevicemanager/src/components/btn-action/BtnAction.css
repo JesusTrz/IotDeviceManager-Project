@@ -14,13 +14,13 @@
 
 
 .btn-action:hover {
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
     transform: translateY(-5px);
-    box-shadow: 0 5px 0 0 #4f4f4f;
+    box-shadow: 0 5px 0 0 gray;
 }
 
 .btn-action:active {
     transform: translateY(0);
-    box-shadow: 0 2px 0 0 #4f4f4f;
+    box-shadow: 0 2px 0 0 gray;
 }

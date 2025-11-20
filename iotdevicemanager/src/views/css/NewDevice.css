@@ -1,23 +1,19 @@
-.new-device-container{
+.new-device-container {
     margin: 25px 35px;
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.header-new-device{
+.header-new-device {
     display: flex;
     gap: 20px;
 }
 
-.form-device{
+.form-device {
     display: flex;
     flex-direction: column;
     gap: 15px;
-}
-
-.form-device input {
-    padding: 10px;
 }
 
 .new-device-form {
@@ -33,40 +29,57 @@
     flex-direction: column;
     width: 500px;
     gap: 15px;
-    background-color: black;
-    color: white;
+    border-radius: 50px;
+    background: linear-gradient(145deg, #cacaca, #f0f0f0);
+    box-shadow: 20px 20px 60px #bebebe,
+        -20px -20px 60px #ffffff;
+    color: black;
     padding: 30px 20px;
     font-size: 20px;
     border-radius: 30px;
-    box-shadow: -5px 10px 0 #4f4f4f;
+}
+
+.add-device-form label {
+    background-color: transparent;
 }
 
 .new-device-form input {
-    height: 30px;
-    font-size: 15px;
-    padding: 0 10px;
-    border: 0;
-    border-radius: 50px;
-    transition: all 0.2s ease-in-out;
+    border: none;
+    padding: 1rem;
+    border-radius: 1rem;
+    background: #e8e8e8;
+    box-shadow: 20px 10px 40px #c5c5c5,
+        -20px -10px 40px #ffffff;
+    transition: 0.3s;
 }
 
 
 .new-device-form input:focus {
-    box-shadow: 0 0 10px white;
+    outline-color: #e8e8e8;
+    background: #e8e8e8;
+    box-shadow: inset 20px 20px 60px #c5c5c5,
+        inset -20px -20px 60px #ffffff;
+    transition: 0.3s;
 }
 
 .new-device-form select {
     height: 30px;
     width: 500px;
-    font-size: 15px;
-    padding: 0 10px;
-    border: 0;
-    border-radius: 50px;
-    transition: all 0.2s ease-in-out;
+    text-align: center;
+    border: none;
+    border-radius: 0.5rem;
+    background: #e8e8e8;
+    box-shadow: 20px 10px 40px #c5c5c5,
+        -20px -10px 40px #ffffff;
+    transition: 0.3s;
 }
 
 .new-device-form select:focus {
-    box-shadow: 0 0 10px white;
+    outline-color: #e8e8e8;
+    background: #e8e8e8;
+    box-shadow: inset 20px 20px 60px #c5c5c5,
+        inset -20px -20px 60px #ffffff;
+    transition: 0.3s;
 }
 
 
@@ -75,13 +88,19 @@
     line-height: 1.5;
     field-sizing: inherit;
     resize: none;
-    padding: 10px;
-    border: 0;
-    border-radius: 20px;
-    margin-bottom: 10px;
-    transition: all 0.2s ease-in-out;
+    border: none;
+    padding: 1rem;
+    border-radius: 1rem;
+    background: #e8e8e8;
+    box-shadow: 20px 10px 40px #c5c5c5,
+        -20px -10px 40px #ffffff;
+    transition: 0.3s;
 }
 
 .new-device-form textarea:focus {
-    box-shadow: 0 0 10px white;
+    outline-color: #e8e8e8;
+    background: #e8e8e8;
+    box-shadow: inset 20px 20px 60px #c5c5c5,
+        inset -20px -20px 60px #ffffff;
+    transition: 0.3s;
 }

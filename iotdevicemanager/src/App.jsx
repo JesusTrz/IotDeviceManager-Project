@@ -1,5 +1,8 @@
 import React from 'react'
 import {Routes, Route} from 'react-router-dom'
+// VISTA DE INICIO
+import StartView from './views/StartView'
+
 // VISTAS PREDETERMINADAS
 import Dashboard from './views/Dashboard'
 
@@ -11,9 +14,10 @@ import EditDevice from './views/EditDevice'
 function App() {
   return (
     <Routes>
+      {/* RUTA INICIAL */}
+      
       {/* RUTAS */}
       <Route path='/' element={<Dashboard />} />
-
 
       {/* VISTAS CRUD */}
       <Route path="/newDevice" element={<NewDevice />} />

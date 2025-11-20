@@ -61,18 +61,19 @@
 .device-item {
     display: flex;
     flex-direction: column;
-    background: black;
-    color: white;
-    border-radius: 20px;
     padding: 16px;
+    gap: 15px;
     margin: 5px 0 10px 5px;
     font-size: 16px;
-    transition: all 0.3s ease;
+    border-radius: 30px;
+    background: #e0e0e0;
+    box-shadow: 20px 20px 40px #bebebe,
+        -20px -20px 40px #ffffff;
+    transition: all 0.3s ease-in-out;
 }
 
 .device-item:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 6px 0 0 #4f4f4f;
+    transform: translateY(-5px);
 }
 
 .device-actions {

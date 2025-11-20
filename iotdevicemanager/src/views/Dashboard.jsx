@@ -62,9 +62,9 @@ const Dashboard = () => {
         <h2>Tus Dispositivos:</h2>
 
         <Link to={"/newDevice"} title="Agregar Nuevo Dispositivo">
-          <BtnAction>
-            <HiPlus size={20} />
-          </BtnAction>
+          <BtnActionUser>
+            <HiPlus size={20} style={{backgroundColor:"transparent"}} />
+          </BtnActionUser>
         </Link>
       </div>
 
@@ -90,11 +90,11 @@ const Dashboard = () => {
                 <div className="device-actions">
                   <Link to={`/editDevice/${device.id}`} title="Editar Dispositivo">
                     <BtnActionUser>
-                      <HiWrench size={20} />
+                      <HiWrench size={20}  style={{backgroundColor:"transparent"}}/>
                     </BtnActionUser>
                   </Link>
                   <BtnActionUser onClick={() => handleDelete(device.id)}>
-                    <HiTrash size={20} />
+                    <HiTrash size={20}  style={{backgroundColor:"transparent"}}/>
                   </BtnActionUser>
                 </div>
               </li>

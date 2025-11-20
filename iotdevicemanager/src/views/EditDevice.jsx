@@ -102,7 +102,7 @@ const EditDevice = () => {
     <div className="device-edit-container">
       <div className="header-edit-device">
         <BtnAction onClick={volverAtras}>
-          <HiArrowLeft size={30} />
+          <HiArrowLeft size={30} style={{backgroundColor:"transparent"}} />
         </BtnAction>
         <div className="subtitle-edit-device">
           <h1>Configurar Dispositivo</h1>
@@ -141,7 +141,7 @@ const EditDevice = () => {
           />
 
           <BtnActionUser type="submit">
-            <HiWrenchScrewdriver size={20} style={{ paddingRight: "10px" }} />
+            <HiWrenchScrewdriver size={20} style={{ paddingRight: "10px", backgroundColor:"transparent" }} />
             Guardar
           </BtnActionUser>
         </form>
@@ -201,7 +201,7 @@ const EditDevice = () => {
                         {new Date(snap.timestamp).toLocaleString()}
                       </p>
 
-                      <BtnActionUser
+                      <BtnAction
                         style={{ marginTop: "10px" }}
                         onClick={async () => {
                           const ok = confirm("¿Restaurar este snapshot?");
@@ -226,7 +226,7 @@ const EditDevice = () => {
                         }}
                       >
                         Restaurar
-                      </BtnActionUser>
+                      </BtnAction>
                     </div>
                   </div>
                 );

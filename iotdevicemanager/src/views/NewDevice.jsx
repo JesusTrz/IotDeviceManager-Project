@@ -63,7 +63,7 @@ const NewDevice = () => {
     <div className="new-device-container">
       <div className="header-new-device">
         <BtnAction onClick={volverAtras}>
-          <HiArrowLeft size={30} />
+          <HiArrowLeft size={30} style={{backgroundColor:"transparent"}} />
         </BtnAction>
 
         <div className="subtitle-device">
@@ -104,7 +104,7 @@ const NewDevice = () => {
           ></textarea>
 
           <BtnActionUser type="submit">
-            <HiCpuChip size={20} style={{ paddingRight: "10px" }} />
+            <HiCpuChip size={20} style={{ paddingRight: "10px", backgroundColor:"transparent" }} />
             Agregar Dispositivo
           </BtnActionUser>
         </form>

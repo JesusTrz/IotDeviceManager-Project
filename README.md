@@ -21,7 +21,11 @@ Esta aplicación consume la API construida en [.NET 9 Web API](https://github.co
 
 ## 📸 Capturas de Pantalla
 
+<img width="1919" height="915" alt="Image" src="https://github.com/user-attachments/assets/17bd1b36-8e8a-4e6b-94b7-9c95986f7134" />
 
+<img width="1899" height="916" alt="Image" src="https://github.com/user-attachments/assets/6f47ac89-cad9-4383-80a3-53a15cb74262" />
+
+<img width="1919" height="917" alt="Image" src="https://github.com/user-attachments/assets/2545787d-cd40-4986-a800-3b1f0f524926" />
 
 ---
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./css/Dashboard.css";
-import { useSignalR } from '../context/SignalRContext'; 
+import { useSignalR } from "../context/SignalRContext";
 import { deleteDevice, getAllDevices } from "../api/devicesApi";
 
 import { Link } from "react-router-dom";
@@ -13,9 +13,10 @@ import BtnActionUser from "../components/btn-action/BtnActionUser";
 const Dashboard = () => {
   const [devices, setDevices] = useState([]);
 
-  const { mensajes } = useSignalR();
+  const { connection, mensajes } = useSignalR();
 
   useEffect(() => {
+    // 1. Cargar dispositivos (Esto está bien)
     getAllDevices()
       .then((res) => {
         console.log("Dispositivos obtenidos:", res.data);
@@ -24,7 +25,27 @@ const Dashboard = () => {
       .catch((err) => {
         console.error("Error al obtener dispositivos:", err);
       });
-  }, []);
+
+    // 2. Configurar SignalR (Solo si existe la conexión)
+    if (connection) {
+      const handleCambioEstado = (update) => {
+        console.log("Status Cambiado: ", update);
+        setDevices((prevDevices) =>
+          prevDevices.map((d) =>
+            d.id === update.id ? { ...d, status: update.status } : d
+          )
+        );
+      };
+
+      // Nos suscribimos al evento
+      connection.on("CambioEstado", handleCambioEstado);
+
+      // 3. LIMPIEZA: Nos desuscribimos si el componente muere o la conexión cambia
+      return () => {
+        connection.off("CambioEstado", handleCambioEstado);
+      };
+    }
+  }, [connection]); // 👈 ¡IMPORTANTE! Agregamos 'connection' aquí
 
   const handleDelete = async (id) => {
     const confirmed = window.confirm(
@@ -88,7 +109,7 @@ const Dashboard = () => {
                       <b>Status: </b> {device.status}
                     </p>
                     <p>
-                      <b>Temperatura: </b> {ultimoMensaje?.valor ?? "--"} °C
+                      <b>Temperatura: </b> { device.status === "Fuera de Linea" ? "--" : ultimoMensaje?.valor ?? "--"} °C
                     </p>
                   </div>
 

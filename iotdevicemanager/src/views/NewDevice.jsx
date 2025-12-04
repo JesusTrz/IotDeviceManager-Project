@@ -17,11 +17,21 @@ const NewDevice = () => {
     window.history.back();
   };
 
+  // JSON BASE DEL FORMULARIO
+
+   // Json Base
+  const baseConfig = {
+    IntervaloEnvio: 5,
+    Unidad: "Celsius",
+    UmbralAlerta: 30
+  };
+
   // ESTADOS DEL FORMULARIO
   const [newDevice, setNewDevice] = useState({
+    macAddress: "",
     name: "",
     status: "En Linea",
-    currentConfigJson: "",
+    currentConfigJson: JSON.stringify(baseConfig, null, 2),
   });
 
   // Cambio de inputs
@@ -85,6 +95,13 @@ const NewDevice = () => {
             value={newDevice.name}
             onChange={handleChange}
           />
+
+          <label>MacAddress:</label>
+          <input 
+          type="text"
+          name="macAddress"
+          value={newDevice.macAddress}
+          onChange={handleChange} />
 
           <label>Status:</label>
           <select

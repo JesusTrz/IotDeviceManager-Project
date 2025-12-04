@@ -25,6 +25,8 @@ const EditDevice = () => {
     window.history.back();
   };
 
+  const [configValues, setConfigValues] = useState({});
+
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -62,6 +64,15 @@ const EditDevice = () => {
         }
 
         setDevice(current);
+
+        try {
+          const configObject = JSON.parse(current.currentConfigJson || "{}");
+          setConfigValues(configObject);
+        } catch (error){
+          console.error("ERROR AL LEER LA CONFIGURACIÓN: " + error);
+          setConfigValues({})
+        }
+
         setLoading(false);
 
         loadHistory();
@@ -85,8 +96,16 @@ const EditDevice = () => {
   // GUARDAR CAMBIOS SIN SNAPSHOT
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const jsonString = JSON.stringify(configValues);
+
+    const deviceActualizado = {
+      ...device,
+      currentConfigJson: jsonString
+    };
+
     try {
-      await updateDevice(id, device);
+      await updateDevice(id, deviceActualizado);
       alert("Dispositivo actualizado correctamente");
       navigate(-1);
     } catch (error) {
@@ -96,6 +115,16 @@ const EditDevice = () => {
   };
 
   if (loading) return <h2>Cargando...</h2>;
+
+  // Cambio de Inputs Dinamicos
+  const handleConfigChange = (e) => {
+    const { name, value } = e.target;
+
+    setConfigValues((prevConfig) => ({
+      ...prevConfig,
+      [name] : value,
+    }));
+  }
 
   // RENDERIZADO
   return (
@@ -133,12 +162,26 @@ const EditDevice = () => {
             <option value="Fuera de Linea">Fuera de Linea</option>
           </select>
 
-          <label>Configuración (JSON):</label>
+          <div className="dynamic-config-container">
+            <h3>Configuración Dinámica:</h3>
+            {Object.keys(configValues).map((key) => (
+              <div key={key} className="config-item">
+                <label>{key}:</label>
+                <input 
+                type="text"
+                name={key}
+                value={configValues[key]}
+                onChange={handleConfigChange} />
+              </div>
+            ))}
+          </div>
+
+          {/* <label>Configuración (JSON):</label>
           <textarea
             name="currentConfigJson"
             value={device.currentConfigJson}
             onChange={handleChange}
-          />
+          /> */}
 
           <BtnActionUser type="submit">
             <HiWrenchScrewdriver size={20} style={{ paddingRight: "10px", backgroundColor:"transparent" }} />
@@ -209,7 +252,6 @@ const EditDevice = () => {
 
                           try {
                             await restoreSnapshot(id, snap.id);
-
                             alert("Snapshot restaurado correctamente");
 
                             const updatedDevices = await getAllDevices();
@@ -219,6 +261,14 @@ const EditDevice = () => {
 
                             setDevice(updatedDevice);
                             loadHistory();
+
+                            try {
+                              const newConfig = JSON.parse(updatedDevice.currentConfigJson || "{}");
+                              setConfigValues(newConfig);
+                            } catch (e) {
+                              console.error("Error al parsear snapshot restaurado", e);
+                            }
+
                           } catch (err) {
                             alert("Error al restaurar snapshot");
                             console.error(err);

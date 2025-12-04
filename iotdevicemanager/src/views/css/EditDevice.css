@@ -42,6 +42,29 @@
   box-shadow: 20px 10px 40px #c5c5c5,
     -20px -10px 40px #ffffff;
   transition: 0.3s;
+  
+}
+
+.dynamic-config-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 30px;
+  padding: 10px;
+}
+
+.device-edit-container h3 {
+  background: transparent;
+}
+
+.dynamic-config-container label {
+  background: transparent;
+}
+
+.dynamic-config-container input{
+  display: flex;
+  height: 10px;
+  background: transparent;
 }
 
 .edit-form input:focus {

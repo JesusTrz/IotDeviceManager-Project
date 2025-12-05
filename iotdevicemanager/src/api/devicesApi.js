@@ -14,3 +14,6 @@ export const deleteDevice = (id) => API_BASE_URL.delete(`/Device/${id}`);
 export const createSnapshot = (id) => API_BASE_URL.post(`Device/${id}/snapshot`); // Crear
 export const getSnapshotsHistory = (id) => API_BASE_URL.get(`Device/${id}/history`); // Obtener
 export const restoreSnapshot = (deviceId, snapshotId) => API_BASE_URL.post(`Device/${deviceId}/restore/${snapshotId}`); // Restaurar
+
+// SENDGRID TWILIO SMS
+export const sendDeviceSms = (id, phoneNumber) => API_BASE_URL.post(`Device/${id}/send-sms`, { targetPhoneNumber: phoneNumber});

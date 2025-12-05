@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./css/Dashboard.css";
 import { useSignalR } from "../context/SignalRContext";
-import { deleteDevice, getAllDevices } from "../api/devicesApi";
+import { deleteDevice, getAllDevices, sendDeviceSms } from "../api/devicesApi";
 
 import { Link } from "react-router-dom";
 
-import { HiPlus, HiWrench, HiTrash } from "react-icons/hi2";
+import { HiPlus, HiWrench, HiTrash, HiChatBubbleBottomCenterText } from "react-icons/hi2";
 
-import BtnAction from "../components/btn-action/BtnAction";
 import BtnActionUser from "../components/btn-action/BtnActionUser";
 
 const Dashboard = () => {
@@ -64,6 +63,21 @@ const Dashboard = () => {
     }
   };
 
+  // funcion de sendgrid
+  const handleSendSms = async (id) => {
+    const phoneNumber = prompt("Ingresa tu número (con lada, ej: +521122334455):");
+
+    if(!phoneNumber) return; // Se cancela ai no se hace nada
+
+    try {
+      await sendDeviceSms(id, phoneNumber);
+      alert("¡SMS Enviado con éxito!");
+    } catch (error) {
+      console.error("Error SMS: ", error);
+      alert("Error al enviar el SMS.");
+    }
+  };
+
   return (
     <div className="dashboard-container">
       <div className="header-dashboard">
@@ -114,6 +128,14 @@ const Dashboard = () => {
                   </div>
 
                   <div className="device-actions">
+
+                    <BtnActionUser onClick={() => handleSendSms(device.id)}>
+                        <HiChatBubbleBottomCenterText
+                          size={20}
+                          style={{ backgroundColor: "transparent" }}
+                        />
+                      </BtnActionUser>
+
                     <Link
                       to={`/editDevice/${device.id}`}
                       title="Editar Dispositivo"
